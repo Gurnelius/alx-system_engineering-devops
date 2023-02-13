@@ -1,0 +1,8 @@
+#!/bin/bash
+read -p "enter file name :" data1
+read -p "enter right command for file :" data2
+echo -e "#!/bin/bash\n${data2}" > ${data1}
+chmod u+x *
+git add .
+git commit -m "Initial commit"
+git push
