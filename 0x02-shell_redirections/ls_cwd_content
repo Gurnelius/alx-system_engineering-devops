@@ -1,0 +1,13 @@
+total 36
+drwxr-xr-x 2 root root 203 Feb 13 01:53 .
+drwxr-xr-x 6 root root 138 Feb 13 01:12 ..
+-rwxr--r-- 1 root root  24 Feb 13 01:20 0-hello_world
+-rwxr--r-- 1 root root  27 Feb 13 01:25 1-confused_smiley
+-rwxr--r-- 1 root root  28 Feb 13 01:27 2-hellofile
+-rwxr--r-- 1 root root  39 Feb 13 01:36 3-twofiles
+-rwxr--r-- 1 root root  35 Feb 13 01:37 4-lastlines
+-rwxr--r-- 1 root root  29 Feb 13 01:39 5-firstlines
+-rwxr--r-- 1 root root  42 Feb 13 01:46 6-third_line
+-rwxr--r-- 1 root root  47 Feb 13 01:51 7-file
+-rw-r--r-- 1 root root   0 Feb 13 01:53 ls_cwd_content
+-rwxr--r-- 1 root root 198 Feb 13 01:19 magic_shell
