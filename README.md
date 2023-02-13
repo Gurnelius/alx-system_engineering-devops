@@ -1,1 +1,1 @@
-ALX Bash, Shell and DevOps Project
+ALX Shell I/O Redirection Assignment
