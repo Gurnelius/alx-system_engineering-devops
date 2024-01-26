@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
-
 ps -e -o user,pid,cpu,%mem,vsz,rss,tty=TTY,stat,start,time,command
