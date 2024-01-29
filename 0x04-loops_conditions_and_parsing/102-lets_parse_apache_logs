@@ -11,4 +11,4 @@ then
 	exit 1
 fi
 
-awk '{print $1, $9}' "$logfile" | column -t
+awk '{print $1, $9}' "$logfile" | column -s
