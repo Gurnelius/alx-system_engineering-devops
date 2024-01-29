@@ -5,10 +5,4 @@
 
 logfile="apache-access.log"
 
-if [ ! -f $logfile ];
-then
-	echo "Apache logfile: $logfile not found."
-	exit 1
-fi
-
 awk '{print $1, $9}' "$logfile" | column -c columns
