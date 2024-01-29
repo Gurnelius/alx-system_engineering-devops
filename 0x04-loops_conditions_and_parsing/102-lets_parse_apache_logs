@@ -5,4 +5,4 @@
 
 logfile="apache-access.log"
 
-awk '{print $1, $9}' "$logfile" | column -c columns
+awk '{print $1 " " $9}' "$logfile"
