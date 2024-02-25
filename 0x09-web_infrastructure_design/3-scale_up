@@ -1,0 +1,29 @@
+Expand on the previous design (2-secured_and_monitored_web_infrastructure) by adding more components:
+
+1. Servers:
+   - Server 1: Web server (Nginx)
+   - Server 2: Application server
+   - Server 3: Database server (MySQL)
+   - Server 4: Additional server (for example, for caching or additional application components)
+
+2. Load Balancer Cluster:
+   - Two load balancers (HAProxy) configured as a cluster for redundancy and load distribution. This setup ensures high availability and fault tolerance by distributing incoming traffic across multiple load balancers.
+
+3. Split Components:
+   - Each component (web server, application server, database) is hosted on its own dedicated server for better resource management, scalability, and isolation. Separating components allows for easier scaling of individual components based on their specific requirements and load patterns.
+
+4. Additional Server:
+   - Adding an extra server provides flexibility for hosting additional services or components, such as caching servers (e.g., Redis or Memcached) to improve application performance by reducing database load or storing frequently accessed data closer to the application servers.
+
+Specifics:
+
+- Additional Server:
+  - By adding an extra server, we can offload specific tasks from other servers, distribute the workload more evenly, and improve overall system performance and resilience. For example, caching servers can reduce database load and latency by storing frequently accessed data in memory, resulting in faster response times for users.
+
+- Load Balancer Cluster:
+  - Configuring HAProxy as a cluster enhances fault tolerance and ensures uninterrupted service availability. If one load balancer fails, the other can seamlessly take over, preventing disruptions to incoming traffic. Additionally, load balancing across multiple servers optimizes resource utilization and improves scalability by evenly distributing requests among available resources.
+
+- Split Components:
+  - Separating components onto dedicated servers enhances security, isolation, and scalability. It allows for better resource allocation and management, as each component can be optimized independently based on its specific requirements. For example, the database server can be configured with specialized hardware or software settings for optimal database performance, while the web server can prioritize serving web content efficiently.
+
+By adding these components and configurations, the infrastructure becomes more robust, scalable, and resilient to failures. It enables efficient resource utilization, improved performance, and better management of the entire system.
