@@ -1,0 +1,41 @@
+To design a three-server web infrastructure for hosting the website www.foobar.com, let's outline the components and their roles:
+
+1. Servers: We'll have three servers each with the following components:
+   - Server 1: Web server (Nginx)
+   - Server 2: Application server
+   - Server 3: Database server (MySQL)
+
+2. Web Server (Nginx): Handles incoming HTTP requests from clients and forwards them to the application server. Also serves static content directly to clients.
+
+3. Application Server: Hosts the application codebase and processes dynamic requests. It communicates with the database server to fetch or update data.
+
+4. Load Balancer (HAProxy): Distributes incoming traffic across multiple servers to ensure high availability and scalability. It enables an Active-Passive setup, where one server is active and the other is passive, ready to take over in case the active server fails.
+
+5. Application Files (Codebase): Contains the website's codebase, including HTML, CSS, JavaScript, and server-side scripts or programs.
+
+6. Database (MySQL): Stores and manages the website's data. It consists of a primary-replica (master-slave) cluster for data redundancy and fault tolerance.
+
+Distribution Algorithm: The load balancer (HAProxy) can be configured with various distribution algorithms, such as round-robin, least connections, or source IP hashing. Round-robin is commonly used, where each server is selected in turn for each new connection.
+
+Active-Active vs. Active-Passive:
+- Active-Active: Both servers are actively serving traffic simultaneously. This setup provides better scalability and fault tolerance but requires synchronization between servers to ensure consistency.
+- Active-Passive: One server (active) handles incoming traffic while the other server (passive) remains on standby. In case of failure of the active server, the passive server takes over. This setup ensures high availability with less complexity but may result in underutilization of resources.
+
+Database Primary-Replica Cluster:
+- In a primary-replica (master-slave) cluster, the primary node (master) handles all write operations and replicates data changes to the replica nodes (slaves). Replica nodes serve read-only queries and can take over as the primary node if the current primary fails.
+
+Difference between Primary and Replica Node:
+- Primary Node: Handles write operations and serves as the authoritative source of data. It's responsible for maintaining data consistency and durability.
+- Replica Node: Receives data replication from the primary node and serves read-only queries. It acts as a backup and failover mechanism in case the primary node fails.
+
+Issues with the Infrastructure:
+1. Single Points of Failure (SPOFs):
+   - The single load balancer can become a point of failure. Introducing redundancy with multiple load balancers would mitigate this risk.
+   - Lack of redundancy in other components like the web server, application server, and database server can also lead to SPOFs.
+
+2. Security Issues:
+   - No firewall mentioned in the infrastructure design could expose the servers to security threats.
+   - Lack of HTTPS encryption poses a security risk as data transmission between clients and servers is not encrypted.
+
+3. No Monitoring:
+   - Without monitoring tools and processes in place, it's challenging to identify and address performance issues, security breaches, or hardware failures proactively. Implementing monitoring solutions would help ensure the health and security of the infrastructure.

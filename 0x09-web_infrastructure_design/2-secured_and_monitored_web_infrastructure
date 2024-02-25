@@ -1,0 +1,38 @@
+Design a three-server web infrastructure for www.foobar.com with security measures, encrypted traffic, and monitoring:
+
+1. We have three server infrastructure with the following components:
+   - Server 1: Web server (Nginx)
+   - Server 2: Application server
+   - Server 3: Database server (MySQL)
+
+2. Firewalls:
+   - Each server is equipped with a firewall to control incoming and outgoing traffic. Firewalls help protect against unauthorized access and malicious attacks by filtering network traffic based on predefined security rules.
+
+3. SSL Certificate:
+   - An SSL certificate is installed on the web server to enable HTTPS encryption for www.foobar.com. HTTPS encrypts data transmitted between the client's browser and the web server, ensuring confidentiality and integrity of information exchanged.
+
+4. Monitoring Clients:
+   - Each server is configured with a monitoring client (e.g., Sumo Logic agent) to collect performance metrics, logs, and other relevant data. Monitoring helps track system health, identify issues, and facilitate troubleshooting.
+
+Specifics:
+
+- Firewalls: Firewalls are added to restrict access to the servers and protect them from unauthorized access, malicious attacks, and potential security breaches.
+
+- HTTPS Encryption: Traffic is served over HTTPS to encrypt data transmitted between clients and the web server. This protects sensitive information (e.g., login credentials, personal data) from eavesdropping and tampering during transmission.
+
+- Monitoring: Monitoring is used to track server performance, detect anomalies, and ensure system availability and reliability. Monitoring tools collect data on metrics such as CPU usage, memory utilization, network traffic, and server uptime.
+
+- Data Collection: The monitoring tool collects data by deploying agents or clients on each server. These agents continuously gather performance metrics, log files, and other relevant data, which are then sent to a central monitoring server or cloud-based service for analysis and visualization.
+
+- Monitoring QPS: To monitor web server queries per second (QPS), you can configure the monitoring tool to track metrics related to web server traffic, such as HTTP request rate, response times, and server load. Analyzing these metrics helps assess server performance, identify bottlenecks, and optimize resource allocation.
+
+Issues:
+
+1. Terminating SSL at Load Balancer Level:
+   - Terminating SSL at the load balancer exposes decrypted traffic between the load balancer and the web server, potentially compromising data security. It's recommended to terminate SSL at the web server to maintain end-to-end encryption.
+
+2. Single MySQL Server Accepting Writes:
+   - Having only one MySQL server capable of accepting write operations creates a single point of failure. Introducing replication and failover mechanisms (e.g., MySQL master-slave replication, clustering) would enhance availability and fault tolerance.
+
+3. Uniform Server Components:
+   - Deploying servers with identical components (i.e., database, web server, application server) may lead to uniform vulnerabilities and dependencies across the infrastructure. Diversifying server configurations and implementing proper security measures would mitigate risks associated with uniformity.
