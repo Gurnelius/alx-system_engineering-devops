@@ -18,7 +18,7 @@ backend web-backend
     server 230808-web-02 100.25.103.182 check
 "
 sudo echo -e "$load_bl_conf" > /etc/haproxy/haproxy.cfg
-echo "ENABLED=1" >> /etc/default/haproxy.cfg
+echo "ENABLED=1" >> /etc/default/haproxy
 
 if [[ "$(pgrep -f haproxy)" ]]; then
     sudo service haproxy restart
