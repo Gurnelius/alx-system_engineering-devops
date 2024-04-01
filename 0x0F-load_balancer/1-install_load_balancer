@@ -7,7 +7,7 @@ sudo apt-get install haproxy=2.8.\*
 sudo chown -R "$USER":"$USER" /etc/default/
 sudo chown -R "$USER":"$USER" /etc/haproxy/
 load_bl_conf=\
-frontend web-frontend
+"frontend web-frontend
     bind *:80
     default_backend web-backend
 
