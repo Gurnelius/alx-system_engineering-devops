@@ -26,11 +26,4 @@ main() {
     fi
 }
 
-# Check for mandatory arguments
-if [ "$#" -lt 1 ]; then
-    echo "Usage: $0 domain [subdomain]"
-    exit 1
-fi
-
 main "$@"
-
