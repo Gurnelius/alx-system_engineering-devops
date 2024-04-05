@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <filename>"
+    exit 1
+fi
+
+filename=$1
+
+# Add the file to the repository
+git add "$filename"
+
+# Commit the changes with the message "Initial Commit"
+git commit -m "Initial Commit"
+
+# Push
+git push
