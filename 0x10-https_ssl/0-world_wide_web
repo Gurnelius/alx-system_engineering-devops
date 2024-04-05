@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# Configure domain zone so that the subdomain www
+# points to the load-balancer IP (lb-01).
+# Add other subdomains display information about subdomains.
 
 # Function to display information about a specific subdomain
 display_info() {
