@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """
     Consume an API https://jsonplaceholder.typicode.com/todos/1
 """
