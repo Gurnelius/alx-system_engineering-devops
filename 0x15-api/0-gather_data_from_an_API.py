@@ -9,20 +9,26 @@ import sys
 
 
 if __name__ == "__main__":
-    id = sys.argv[1]
-    url = "https://jsonplaceholder.typicode.com/todos/"
+    userId = sys.argv[1]
+    url = "https://jsonplaceholder.typicode.com/users"
+    url = url + "/" + userId
+
     response = requests.get(url)
-    if response.status_code == 200:
-        json = response.json()
-        total_tasks = 0
-        completed_tasks = 0
-        tasks_titles = ""
-        for task in json:
-            if task.get("userId") == int(id):
-                total_tasks += 1
-                tasks_titles += "\t" + task.get("title") + "\n"
-                if task.get("completed"):
-                    completed_tasks += 1
-        tasks_titles = tasks_titles.rstrip()
-        print("Employee {} is done with tasks({}/{}):".format(id, completed_tasks, total_tasks))
-        print(tasks_titles)
+    employeeName = response.json().get('name')
+
+    todoUrl = url + "/todos"
+    response = requests.get(todoUrl)
+    total_tasks = response.json()
+    completed = 0
+    completed_tasks = []
+
+    for task in total_tasks:
+        if task.get('completed'):
+            completed_tasks.append(task)
+            completed += 1
+
+    print("Employee {} is done with tasks({}/{}):"
+          .format(employeeName, completed, len(total_tasks)))
+
+    for completed_task in completed_tasks:
+        print("\t {}".format(completed_task.get('title')))
