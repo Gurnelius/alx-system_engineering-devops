@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-
 """
-    Consume an API https://jsonplaceholder.typicode.com/todos/1
+    Consume an API https://jsonplaceholder.typicode.com/todos/
+    And save the results in a CSV
 """
 
 import requests
@@ -21,5 +21,8 @@ if __name__ == '__main__':
 
     with open('{}.csv'.format(userId), 'w') as file:
         for task in tasks:
-            file.write('"{}","{}","{}","{}"\n'
-                .format(userId, username, task.get('completed'),task.get('title')))
+            file.write(
+                '"{}","{}","{}","{}"\n'
+                .format(userId, username, task.get('completed'),
+                        task.get('title'))
+                )
