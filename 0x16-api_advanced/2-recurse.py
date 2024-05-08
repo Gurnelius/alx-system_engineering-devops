@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ Query the Reddit API using recursive function """
 import requests
-import sys
 
 
 after = None
