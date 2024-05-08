@@ -14,7 +14,7 @@ def top_ten(subreddit):
     Returns:
     - None
     """
-    headers = {'User-Agent': 'xica369'}
+    headers = {'User-Agent': 'Firelite v3.3.0'}
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     parameters = {'limit': 10}
     response = requests.get(url, headers=headers, allow_redirects=False,

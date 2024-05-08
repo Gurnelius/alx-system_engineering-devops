@@ -17,7 +17,7 @@ def recurse(subreddit, hot_list=[]):
     Returns:
     - list: A list containing post titles if successful, otherwise None.
     """
-    headers = {'User-Agent': 'xica369'}
+    headers = {'User-Agent': 'Lightfire v1.0.0'}
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     parameters = {'after': after}
     response = requests.get(url, headers=headers, allow_redirects=False,
