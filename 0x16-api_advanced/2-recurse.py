@@ -3,10 +3,8 @@
 import requests
 
 
-after = None
 
-
-def recurse(subreddit, hot_list=[]):
+def recurse(subreddit, hot_list=[], after = None):
     """
     Recursively retrieves posts from the hot section of a subreddit.
 
