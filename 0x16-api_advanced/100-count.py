@@ -6,34 +6,64 @@ after = None
 count_dic = []
 
 
-def count_words(subreddit, word_list):
+import requests
+
+def count_words(subreddit, word_list, after=None, word_counts=None):
     """
-    Counts occurrences of words from a word list in the titles
-    of posts from a subreddit.
+    This function recursively queries the Reddit API, parses hot article titles,
+    and prints a sorted count of keywords (case-insensitive).
 
     Args:
-    - subreddit (str): The name of the subreddit.
-    - word_list (list): A list of words to search for in post titles.
-    Returns:
-    - dict: A dictionary containing word counts if successful, otherwise None.
+        subreddit: The name of the subreddit.
+        word_list: A list of keywords to count.
+        after: An optional parameter for pagination (Reddit API after parameter).
+        word_counts: A dictionary to store keyword counts (used internally during recursion).
     """
-    if count_dic is None:
-        count_dic = {}
-    headers = {'User-Agent': 'Doken v1.0.0'}
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    parameters = {'after': after}
-    response = requests.get(url, headers=headers, allow_redirects=False,
-                            params=parameters)
-    if response.status_code == 200:
-        next_ = response.json().get('data').get('after')
-        if next_ is not None:
-            count_words(subreddit, word_list, after=next_, count_dic=count_dic)
-        list_titles = response.json().get('data').get('children')
-        for title_ in list_titles:
-            title = title_.get('data').get('title')
+
+    # Set a custom User-Agent to avoid "Too Many Requests" errors
+    headers = {'User-Agent': 'My Reddit Keyword Counter v1.0'}
+
+    # Construct the API URL with after parameter for pagination (if provided)
+    url = f"https://reddit.com/r/{subreddit}/hot.json"
+    params = {'after': after} if after else {}
+
+    try:
+        # Send a GET request without following redirects
+        response = requests.get(url, allow_redirects=False, headers=headers, params=params)
+        response.raise_for_status()  # Raise an exception for non-200 status codes
+
+        # Parse the JSON response
+        data = response.json()
+
+        # Check for valid data and data key
+        if not data.get('data'):
+            return
+
+        # Initialize word counts dictionary if not provided
+        if not word_counts:
+            word_counts = {word.lower(): 0 for word in word_list}
+
+        # Extract keywords from titles (case-insensitive, split by delimiters)
+        for post in data['data']['children']:
+            title = post['data']['title'].lower().split()
             for word in word_list:
-                if word in title:
-                    count_dic[word] = count_dic.get(word, 0) + 1
-        return count_dic
-    else:
-        return None
+                clean_word = word.lower().strip("!._-")
+                word_counts[word] += sum(clean_word == w for w in title)
+
+        # Check for next page and make recursive call if available
+        after = data['data'].get('after')
+        if after:
+            count_words(subreddit, word_list, after, word_counts.copy())
+
+    except requests.exceptions.RequestException:
+        # Handle request exceptions
+        return
+
+    # Filter keywords with zero count and sort by count (descending) then alphabetically (ascending)
+    filtered_counts = {word: count for word, count in word_counts.items() if count > 0}
+    sorted_counts = sorted(filtered_counts.items(), key=lambda item: (-item[1], item[0]))
+
+    # Print the sorted keyword counts
+    if sorted_counts:
+        for word, count in sorted_counts:
+            print(f"{word}: {count}")
